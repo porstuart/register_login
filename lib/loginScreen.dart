@@ -202,6 +202,86 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  Widget _buildFBBtn() {
+    return GestureDetector(
+      onTap: () => print('Login with Facebook'),
+      child: Container(
+        height: 60.0,
+        width: 60.0,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              offset: Offset(0, 2),
+              blurRadius: 6.0,
+            ),
+          ],
+          image: DecorationImage(
+            image: AssetImage('assets/images/facebook.jpg'),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildGoogleButton() {
+    return GestureDetector(
+      onTap: () => print('Login with Google'),
+      child: Container(
+        height: 60.0,
+        width: 60.0,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              offset: Offset(0, 2),
+              blurRadius: 6.0,
+            ),
+          ],
+          image: DecorationImage(
+            image: AssetImage('assets/images/google.png'),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildRegisterBtn() {
+    return GestureDetector(
+      onTap: () => print('Register Button'),
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 30.0),
+        child: RichText(
+          text: TextSpan(
+            children: [
+              TextSpan(
+                text: 'Don\'t have an Account?  ',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              TextSpan(
+                text: 'Register Here',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -230,19 +310,13 @@ class _LoginScreenState extends State<LoginScreen> {
               physics: AlwaysScrollableScrollPhysics(),
               padding: EdgeInsets.symmetric(
                 horizontal: 40.0,
-                vertical: 120.0,
+                vertical: 60.0,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    "Login",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'OpenSans',
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Image(
+                    image: AssetImage('assets/images/Logo.png'),
                   ),
                   SizedBox(
                     height: 30.0,
@@ -255,6 +329,41 @@ class _LoginScreenState extends State<LoginScreen> {
                   _buildForgotPW(),
                   _buildRememberMe(),
                   _buildLoginButton(),
+                  Column(
+                    children: <Widget>[
+                      Text(
+                        "-OR-",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      Text(
+                        'Login with',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'OpenSans',
+                        ),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 10.0,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      _buildFBBtn(),
+                      _buildGoogleButton(),
+                    ],
+                  ),
+                  _buildRegisterBtn()
                 ],
               ),
             ),

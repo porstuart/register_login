@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(
-      Duration(seconds: 1),
+      Duration(seconds: 3),
       () => Navigator.push(
         context,
         MaterialPageRoute(
@@ -37,7 +37,19 @@ class _SplashScreenState extends State<SplashScreen> {
       fit: StackFit.expand,
       children: <Widget>[
         Container(
-          decoration: BoxDecoration(color: Colors.white),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color(0xFF73AEF5),
+                Color(0xFF61A4F1),
+                Color(0xFF478DE0),
+                Color(0xFF398AE5),
+              ],
+              stops: [0.1, 0.4, 0.7, 0.9],
+            ),
+          ),
         ),
         Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -49,14 +61,10 @@ class _SplashScreenState extends State<SplashScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      CircleAvatar(
-                        backgroundColor: Colors.white,
-                        radius: 50.0,
-                        child: Image.asset(
-                          'assets/images/splashScreenLogo.png',
-                          height: 70,
-                          width: 100,
-                        ),
+                      Image.asset(
+                        'assets/images/splashScreenLogo.png',
+                        height: 120,
+                        width: 100,
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: 10.0),
@@ -64,7 +72,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       Text(
                         "the spotless",
                         style: TextStyle(
-                          color: Colors.blue[200],
+                          color: Colors.black,
                           fontSize: 24.0,
                           fontWeight: FontWeight.bold,
                         ),
@@ -90,7 +98,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       "Be Spotless \n Be Bright",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: Colors.red[500],
+                        color: Colors.black87,
                         fontSize: 18.0,
                         fontWeight: FontWeight.bold,
                       ),

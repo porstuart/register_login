@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:lab_2/loginScreen.dart';
+import 'loginScreen.dart';
 
 void main() => runApp(MaterialApp(
       theme:

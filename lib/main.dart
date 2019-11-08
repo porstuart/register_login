@@ -83,28 +83,28 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             Expanded(
-                flex: 1,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    CircularProgressIndicator(
-                      valueColor:
-                          new AlwaysStoppedAnimation<Color>(Colors.black),
+              flex: 1,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  CircularProgressIndicator(
+                    valueColor: new AlwaysStoppedAnimation<Color>(Colors.black),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 20.0),
+                  ),
+                  Text(
+                    "Be Spotless \n Be Bright",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.black87,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 20.0),
-                    ),
-                    Text(
-                      "Be Spotless \n Be Bright",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.black87,
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ))
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ],

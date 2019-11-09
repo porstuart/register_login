@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lab_2/registerScreen.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key key}) : super(key: key);
@@ -28,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Container(
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
-            color: Color(0xFF6CA8F1),
+            color: Colors.cyan[300],
             borderRadius: BorderRadius.circular(10.0),
             boxShadow: [
               BoxShadow(
@@ -84,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Container(
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
-            color: Color(0xFF6CA8F1),
+            color: Colors.cyan[300],
             borderRadius: BorderRadius.circular(10.0),
             boxShadow: [
               BoxShadow(
@@ -252,7 +253,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _buildRegisterBtn() {
     return GestureDetector(
-      onTap: () => print('Register Button'),
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => RegisterScreen(),
+        ),
+      ),
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 30.0),
         child: RichText(
@@ -295,10 +301,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Color(0xFF73AEF5),
-                  Color(0xFF61A4F1),
-                  Color(0xFF478DE0),
-                  Color(0xFF398AE5),
+                  Colors.cyan[500],
+                  Colors.cyan[500],
+                  Colors.cyan[400],
+                  Colors.cyan[300],
                 ],
                 stops: [0.1, 0.4, 0.7, 0.9],
               ),

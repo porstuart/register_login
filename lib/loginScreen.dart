@@ -369,7 +369,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       _buildGoogleButton(),
                     ],
                   ),
-                  _buildRegisterBtn()
+                  _buildRegisterBtn(),
                 ],
               ),
             ),

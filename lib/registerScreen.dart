@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:lab_2/loginScreen.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:http/http.dart' as http;
 import 'package:toast/toast.dart';
+import 'loginScreen.dart';
 
 String urlUpload =
     "http://pickupandlaundry.com/thespotless/php/registration.php";
@@ -38,6 +38,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
           height: 60.0,
           child: TextField(
+            controller: _emailController,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
               color: Colors.white,
@@ -83,6 +84,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
           height: 60.0,
           child: TextField(
+            controller: _nameController,
             style: TextStyle(
               color: Colors.white,
               fontFamily: 'OpenSans',
@@ -127,6 +129,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
           height: 60.0,
           child: TextField(
+            controller: _passController,
             obscureText: true,
             style: TextStyle(
               color: Colors.white,
@@ -172,6 +175,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
           height: 60.0,
           child: TextField(
+            controller: _conPasscontroller,
             obscureText: true,
             style: TextStyle(
               color: Colors.white,
@@ -217,6 +221,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
           height: 60.0,
           child: TextField(
+            controller: _phoneController,
             keyboardType: TextInputType.number,
             inputFormatters: <TextInputFormatter>[
               WhitelistingTextInputFormatter.digitsOnly
@@ -251,18 +256,39 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
+  Widget _buildRegisterBtn() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        SizedBox(
+          height: 10,
+        ),
+        RaisedButton(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+          child: Text('Register'),
+          color: Colors.white,
+          elevation: 10,
+          onPressed: _onRegister,
+        ),
+      ],
+    );
+  }
+
+  void _onRegister() {
+    print("onRegister Button from RegisterUser()");
+    uploadData();
+  }
+
   void uploadData() {
     _email = _emailController.text;
     _name = _nameController.text;
     _password = _passController.text;
-    _confirmPassword = _conPasscontroller.text;
     _phoneNum = _phoneController.text;
 
     if ((_isEmailValid(_email)) &&
         (_password.length > 5) &&
-        (_phoneNum.length >= 10) &&
-        (_phoneNum.length <= 11) &&
-        (_password == _confirmPassword)) {
+        (_phoneNum.length > 5)) {
       ProgressDialog pr = new ProgressDialog(context,
           type: ProgressDialogType.Normal, isDismissible: false);
       pr.style(message: "Registration in progress");
@@ -282,6 +308,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         _passController.text = '';
         _conPasscontroller.text = '';
         _phoneController.text = '';
+
         pr.dismiss();
         Navigator.pushReplacement(
             context,
@@ -344,6 +371,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 _buildPasswordTF(),
                 _buildConPassTF(),
                 _buildPhoneTF(),
+                _buildRegisterBtn(),
               ],
             ),
           ),

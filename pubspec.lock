@@ -138,7 +138,7 @@ packages:
     source: hosted
     version: "2.4.0"
   progress_dialog:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: progress_dialog
       url: "https://pub.dartlang.org"
@@ -151,6 +151,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.5"
+  shared_preferences:
+    dependency: "direct dev"
+    description:
+      name: shared_preferences
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.5.4+3"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -199,7 +206,7 @@ packages:
     source: hosted
     version: "0.2.5"
   toast:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: toast
       url: "https://pub.dartlang.org"
@@ -235,3 +242,4 @@ packages:
     version: "2.2.0"
 sdks:
   dart: ">=2.4.0 <3.0.0"
+  flutter: ">=1.6.7 <2.0.0"

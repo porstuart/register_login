@@ -1,18 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:http/http.dart' as http;
 import 'package:toast/toast.dart';
 import 'loginScreen.dart';
 
 String urlUpload =
-    "http://pickupandlaundry.com/thespotless/php/registration.php";
+    "http://pickupandlaundry.com/thespotless/stuart/php/registration.php";
 
 final TextEditingController _emailController = TextEditingController();
 final TextEditingController _nameController = TextEditingController();
 final TextEditingController _passController = TextEditingController();
 final TextEditingController _conPasscontroller = TextEditingController();
 final TextEditingController _phoneController = TextEditingController();
+
+class SizeConfig {
+  static MediaQueryData _mediaQueryData;
+  static double screenWidth;
+  static double screenHeight;
+  static double blockSizeHorizontal;
+  static double blockSizeVertical;
+
+  void init(BuildContext context) {
+    _mediaQueryData = MediaQuery.of(context);
+    screenWidth = _mediaQueryData.size.width;
+    screenHeight = _mediaQueryData.size.height;
+  }
+}
 
 class RegisterScreen extends StatefulWidget {
   RegisterScreen({Key key}) : super(key: key);
@@ -22,7 +37,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  String _email, _name, _password, _confirmPassword, _phoneNum;
+  String _email, _name, _password, _phoneNum;
 
   Widget _buildEmailTF() {
     return Column(
@@ -161,52 +176,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  Widget _buildConPassTF() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        SizedBox(
-          height: 5.0,
-        ),
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          height: 60.0,
-          child: TextField(
-            controller: _conPasscontroller,
-            obscureText: true,
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'OpenSans',
-            ),
-            decoration: InputDecoration(
-              focusedBorder: new UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.black,
-                  width: 2.0,
-                ),
-              ),
-              contentPadding: EdgeInsets.only(
-                top: 14.0,
-              ),
-              prefixIcon: Icon(
-                Icons.lock,
-                color: Colors.white,
-              ),
-              hintText: 'Confirm Password',
-              hintStyle: TextStyle(
-                color: Colors.white54,
-                fontFamily: 'OpenSans',
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
   Widget _buildPhoneTF() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -303,17 +272,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
         print(res.statusCode);
         Toast.show(res.body, context,
             duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-        _emailController.text = '';
-        _nameController.text = '';
-        _passController.text = '';
-        _conPasscontroller.text = '';
-        _phoneController.text = '';
-
-        pr.dismiss();
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (BuildContext context) => LoginScreen()));
+        if (res.body == "success") {
+          _emailController.text = '';
+          _nameController.text = '';
+          _passController.text = '';
+          _conPasscontroller.text = '';
+          _phoneController.text = '';
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => LoginScreen()));
+        } else {
+          pr.dismiss();
+        }
       }).catchError((err) {
         print(err);
       });
@@ -329,6 +300,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
         body: Stack(
       children: <Widget>[
@@ -369,7 +341,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 _buildEmailTF(),
                 _buildNameTF(),
                 _buildPasswordTF(),
-                _buildConPassTF(),
                 _buildPhoneTF(),
                 _buildRegisterBtn(),
               ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:lab_2/validation.dart';
 
 class ForgotPassword extends StatefulWidget {
   ForgotPassword({Key key}) : super(key: key);
@@ -10,7 +11,7 @@ class ForgotPassword extends StatefulWidget {
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
-  String _email;
+  String email;
   var key = GlobalKey<FormState>();
   var loading = false;
 
@@ -26,27 +27,23 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     setState(() {
       loading = true;
     });
-    final response = await http.post("http://pickupandlaundry.com/thespotless/stuart/php/forgotPw.php");
+    final response = await http.post(
+        "http://pickupandlaundry.com/thespotless/stuart/php/forgotPw.php",
+        body: {"email": email.trim()});
     final data = jsonDecode(response.body);
     int value = data['value'];
+    String message = data['message'];
+
     if (value == 1) {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => PasswordValidation(email)));
     } else {
-      AlertDialog(
-        title: Text("Email has not been registered"),
-      );
+      print(message);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    var textFormField = TextFormField(
-                  onSaved: (e) => _email = e,
-                  validator: (e) {
-                    if (e.isEmpty) {
-                      return "Please enter your email";
-                    }
-                  },
-                );
     return Scaffold(
       appBar: AppBar(
         title: Text("Forgot Password"),
@@ -62,7 +59,14 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 SizedBox(
                   height: 8.0,
                 ),
-                textFormField,
+                TextFormField(
+                  onSaved: (e) => email = e,
+                  validator: (e) {
+                    if (e.isEmpty) {
+                      return "Please enter your email";
+                    }
+                  },
+                ),
                 SizedBox(
                   height: 8.0,
                 ),

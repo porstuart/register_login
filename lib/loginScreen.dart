@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'forgotPassword.dart';
 import 'registerScreen.dart';
 import 'mainScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -349,7 +350,9 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _onForgot() {
-    print('Forgot');
+    print('onRegister');
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => ForgotPassword()));
   }
 
   void _onChange(bool value) {
